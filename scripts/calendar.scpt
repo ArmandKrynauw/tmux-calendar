@@ -24,3 +24,16 @@ on fetchStore()
   return theEKEventStore
 end fetchStore
 
+on fetchCalendarNames()
+  set theCalendars to fetchStore()'s calendarsForEntityType:0
+
+  set calendarNames to {}
+
+  repeat with theCalendar in theCalendars
+    set calendarName to theCalendar's title as text
+    set end of calendarNames to calendarName
+  end repeat
+
+  return calendarNames
+end fetchCalendarNames
+
