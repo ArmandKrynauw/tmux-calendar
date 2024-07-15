@@ -24,8 +24,18 @@ on fetchStore()
   return theEKEventStore
 end fetchStore
 
+on fetchEvents(startDate, endDate)
+  set theStore to fetchStore()
+
+	set thePredicate to theStore's predicateForEventsWithStartDate:startDate endDate:endDate calendars:fetchCalendars()
+	set theEvents to theStore's eventsMatchingPredicate:thePredicate
+  set theEvents to theEvents's sortedArrayUsingSelector:"compareStartDateWithEvent:"
+
+	return theEvents
+end fetchEvents
+
 on fetchCalendars()
-  fetchStore()'s calendarsForEntityType:0
+  fetchStore()'s calendarsForEntityType:0 as list
 end fetchCalendars
 
 on fetchCalendarNames()
